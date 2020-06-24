@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v8.1.2 (2020-06-16)
+ * @license Highcharts JS v8.1.2 (2020-06-24)
  *
  * Debugger module
  *
@@ -177,9 +177,7 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var addEvent = U.addEvent,
-            isNumber = U.isNumber,
-            setOptions = U.setOptions;
+        var addEvent = U.addEvent, isNumber = U.isNumber, setOptions = U.setOptions;
         setOptions({
             /**
              * @optionparent chart
@@ -200,13 +198,7 @@
         });
         /* eslint-disable no-invalid-this */
         addEvent(H.Chart, 'displayError', function (e) {
-            var chart = this,
-                code = e.code,
-                msg,
-                options = chart.options.chart,
-                renderer = chart.renderer,
-                chartWidth,
-                chartHeight;
+            var chart = this, code = e.code, msg, options = chart.options.chart, renderer = chart.renderer, chartWidth, chartHeight;
             if (chart.errorElements) {
                 (chart.errorElements).forEach(function (el) {
                     if (el) {

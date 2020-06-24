@@ -1,5 +1,5 @@
 /**
- * @license Highcharts Gantt JS v8.1.2 (2020-06-16)
+ * @license Highcharts Gantt JS v8.1.2 (2020-06-24)
  *
  * CurrentDateIndicator
  *
@@ -41,48 +41,46 @@
          *
          * */
         var dateFormat = O.dateFormat;
-        var addEvent = U.addEvent,
-            merge = U.merge,
-            wrap = U.wrap;
+        var addEvent = U.addEvent, merge = U.merge, wrap = U.wrap;
         var Axis = H.Axis;
         var defaultConfig = {
+            /**
+             * Show an indicator on the axis for the current date and time. Can be a
+             * boolean or a configuration object similar to
+             * [xAxis.plotLines](#xAxis.plotLines).
+             *
+             * @sample gantt/current-date-indicator/demo
+             *         Current date indicator enabled
+             * @sample gantt/current-date-indicator/object-config
+             *         Current date indicator with custom options
+             *
+             * @declare   Highcharts.AxisCurrentDateIndicatorOptions
+             * @type      {boolean|*}
+             * @default   true
+             * @extends   xAxis.plotLines
+             * @excluding value
+             * @product   gantt
+             * @apioption xAxis.currentDateIndicator
+             */
+            currentDateIndicator: true,
+            color: '#ccd6eb',
+            width: 2,
+            /**
+             * @declare Highcharts.AxisCurrentDateIndicatorLabelOptions
+             */
+            label: {
                 /**
-                 * Show an indicator on the axis for the current date and time. Can be a
-                 * boolean or a configuration object similar to
-                 * [xAxis.plotLines](#xAxis.plotLines).
+                 * Format of the label. This options is passed as the fist argument to
+                 * [dateFormat](/class-reference/Highcharts#dateFormat) function.
                  *
-                 * @sample gantt/current-date-indicator/demo
-                 *         Current date indicator enabled
-                 * @sample gantt/current-date-indicator/object-config
-                 *         Current date indicator with custom options
-                 *
-                 * @declare   Highcharts.AxisCurrentDateIndicatorOptions
-                 * @type      {boolean|*}
-                 * @default   true
-                 * @extends   xAxis.plotLines
-                 * @excluding value
+                 * @type      {string}
+                 * @default   '%a, %b %d %Y, %H:%M'
                  * @product   gantt
-                 * @apioption xAxis.currentDateIndicator
+                 * @apioption xAxis.currentDateIndicator.label.format
                  */
-                currentDateIndicator: true,
-                color: '#ccd6eb',
-                width: 2,
-                /**
-                 * @declare Highcharts.AxisCurrentDateIndicatorLabelOptions
-                 */
-                label: {
-                    /**
-                     * Format of the label. This options is passed as the fist argument to
-                     * [dateFormat](/class-reference/Highcharts#dateFormat) function.
-                     *
-                     * @type      {string}
-                     * @default   '%a, %b %d %Y, %H:%M'
-                     * @product   gantt
-                     * @apioption xAxis.currentDateIndicator.label.format
-                     */
-                    format: '%a, %b %d %Y, %H:%M',
-                    formatter: function (value, format) {
-                        return dateFormat(format, value);
+                format: '%a, %b %d %Y, %H:%M',
+                formatter: function (value, format) {
+                    return dateFormat(format, value);
                 },
                 rotation: 0,
                 /**
@@ -96,8 +94,7 @@
         };
         /* eslint-disable no-invalid-this */
         addEvent(Axis, 'afterSetOptions', function () {
-            var options = this.options,
-                cdiOptions = options.currentDateIndicator;
+            var options = this.options, cdiOptions = options.currentDateIndicator;
             if (cdiOptions) {
                 cdiOptions = typeof cdiOptions === 'object' ?
                     merge(defaultConfig, cdiOptions) : merge(defaultConfig);

@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v8.1.2 (2020-06-16)
+ * @license Highcharts JS v8.1.2 (2020-06-24)
  *
  * Item series type for Highcharts
  *
@@ -41,14 +41,7 @@
          *
          * */
         var defaultOptions = O.defaultOptions;
-        var defined = U.defined,
-            extend = U.extend,
-            fireEvent = U.fireEvent,
-            isNumber = U.isNumber,
-            merge = U.merge,
-            objectEach = U.objectEach,
-            pick = U.pick,
-            seriesType = U.seriesType;
+        var defined = U.defined, extend = U.extend, fireEvent = U.fireEvent, isNumber = U.isNumber, merge = U.merge, objectEach = U.objectEach, pick = U.pick, seriesType = U.seriesType;
         var piePoint = H.seriesTypes.pie.prototype.pointClass.prototype;
         /**
          * The item series type.
@@ -177,30 +170,9 @@
             },
             // Get the semi-circular slots
             getSlots: function () {
-                var center = this.center,
-                    diameter = center[2],
-                    innerSize = center[3],
-                    row,
-                    slots = this.slots,
-                    x,
-                    y,
-                    rowRadius,
-                    rowLength,
-                    colCount,
-                    increment,
-                    angle,
-                    col,
-                    itemSize = 0,
-                    rowCount,
-                    fullAngle = (this.endAngleRad - this.startAngleRad),
-                    itemCount = Number.MAX_VALUE,
-                    finalItemCount,
-                    rows,
-                    testRows,
-                    rowsOption = this.options.rows, 
-                    // How many rows (arcs) should be used
-                    rowFraction = (diameter - innerSize) / diameter,
-                    isCircle = fullAngle % (2 * Math.PI) === 0;
+                var center = this.center, diameter = center[2], innerSize = center[3], row, slots = this.slots, x, y, rowRadius, rowLength, colCount, increment, angle, col, itemSize = 0, rowCount, fullAngle = (this.endAngleRad - this.startAngleRad), itemCount = Number.MAX_VALUE, finalItemCount, rows, testRows, rowsOption = this.options.rows, 
+                // How many rows (arcs) should be used
+                rowFraction = (diameter - innerSize) / diameter, isCircle = fullAngle % (2 * Math.PI) === 0;
                 // Increase the itemSize until we find the best fit
                 while (itemCount > this.total + (rows && isCircle ? rows.length : 0)) {
                     finalItemCount = itemCount;
@@ -251,7 +223,7 @@
                 // For each iteration we sort the last slot by the angle, and
                 // remove those with the highest angles.
                 var overshoot = finalItemCount - this.total -
-                        (isCircle ? rows.length : 0);
+                    (isCircle ? rows.length : 0);
                 /**
                  * @private
                  * @param {Highcharts.ItemRowContainerObject} item
@@ -285,8 +257,7 @@
                         .forEach(cutOffRow);
                 }
                 rows.forEach(function (row) {
-                    var rowRadius = row.rowRadius,
-                        colCount = row.colCount;
+                    var rowRadius = row.rowRadius, colCount = row.colCount;
                     increment = colCount ? fullAngle / colCount : 0;
                     for (col = 0; col <= colCount; col += 1) {
                         angle = this.startAngleRad + col * increment;
@@ -303,9 +274,7 @@
                 return slots;
             },
             getRows: function () {
-                var rows = this.options.rows,
-                    cols,
-                    ratio;
+                var rows = this.options.rows, cols, ratio;
                 // Get the row count that gives the most square cells
                 if (!rows) {
                     ratio = this.chart.plotWidth / this.chart.plotHeight;
@@ -334,19 +303,7 @@
                 return rows;
             },
             drawPoints: function () {
-                var series = this,
-                    options = this.options,
-                    renderer = series.chart.renderer,
-                    seriesMarkerOptions = options.marker,
-                    borderWidth = this.borderWidth,
-                    crisp = borderWidth % 2 ? 0.5 : 1,
-                    i = 0,
-                    rows = this.getRows(),
-                    cols = Math.ceil(this.total / rows),
-                    cellWidth = this.chart.plotWidth / cols,
-                    cellHeight = this.chart.plotHeight / rows,
-                    itemSize = this.itemSize || Math.min(cellWidth,
-                    cellHeight);
+                var series = this, options = this.options, renderer = series.chart.renderer, seriesMarkerOptions = options.marker, borderWidth = this.borderWidth, crisp = borderWidth % 2 ? 0.5 : 1, i = 0, rows = this.getRows(), cols = Math.ceil(this.total / rows), cellWidth = this.chart.plotWidth / cols, cellHeight = this.chart.plotHeight / rows, itemSize = this.itemSize || Math.min(cellWidth, cellHeight);
                 /*
                 this.slots.forEach(slot => {
                     this.chart.renderer.circle(slot.x, slot.y, 6)
@@ -357,20 +314,8 @@
                 });
                 //*/
                 this.points.forEach(function (point) {
-                    var attr,
-                        graphics,
-                        pointAttr,
-                        pointMarkerOptions = point.marker || {},
-                        symbol = (pointMarkerOptions.symbol ||
-                            seriesMarkerOptions.symbol),
-                        r = pick(pointMarkerOptions.radius,
-                        seriesMarkerOptions.radius),
-                        size = defined(r) ? 2 * r : itemSize,
-                        padding = size * options.itemPadding,
-                        x,
-                        y,
-                        width,
-                        height;
+                    var attr, graphics, pointAttr, pointMarkerOptions = point.marker || {}, symbol = (pointMarkerOptions.symbol ||
+                        seriesMarkerOptions.symbol), r = pick(pointMarkerOptions.radius, seriesMarkerOptions.radius), size = defined(r) ? 2 * r : itemSize, padding = size * options.itemPadding, x, y, width, height;
                     point.graphics = graphics = point.graphics || {};
                     if (!series.chart.styledMode) {
                         pointAttr = series.pointAttribs(point, point.selected && 'select');

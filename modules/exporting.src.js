@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v8.1.2 (2020-06-16)
+ * @license Highcharts JS v8.1.2 (2020-06-24)
  *
  * Exporting module
  *
@@ -53,18 +53,18 @@
          * @requires modules/full-screen
          */
         var Fullscreen = /** @class */ (function () {
-                /* *
-                 *
-                 *  Constructors
-                 *
-                 * */
-                function Fullscreen(chart) {
-                    /**
-                     * Chart managed by the fullscreen controller.
-                     * @name Highcharts.Fullscreen#chart
-                     * @type {Highcharts.Chart}
-                     */
-                    this.chart = chart;
+            /* *
+             *
+             *  Constructors
+             *
+             * */
+            function Fullscreen(chart) {
+                /**
+                 * Chart managed by the fullscreen controller.
+                 * @name Highcharts.Fullscreen#chart
+                 * @type {Highcharts.Chart}
+                 */
+                this.chart = chart;
                 /**
                  * The flag is set to `true` when the chart is displayed in
                  * the fullscreen mode.
@@ -123,8 +123,7 @@
              * @requires    modules/full-screen
              */
             Fullscreen.prototype.close = function () {
-                var fullscreen = this,
-                    chart = fullscreen.chart;
+                var fullscreen = this, chart = fullscreen.chart;
                 // Don't fire exitFullscreen() when user exited using 'Escape' button.
                 if (fullscreen.isOpen &&
                     fullscreen.browserProps &&
@@ -151,8 +150,7 @@
              * @requires    modules/full-screen
              */
             Fullscreen.prototype.open = function () {
-                var fullscreen = this,
-                    chart = fullscreen.chart;
+                var fullscreen = this, chart = fullscreen.chart;
                 // Handle exitFullscreen() method when user clicks 'Escape' button.
                 if (fullscreen.browserProps) {
                     fullscreen.unbindFullscreenEvent = addEvent(chart.container.ownerDocument, // chart's document
@@ -191,11 +189,7 @@
              */
             Fullscreen.prototype.setButtonText = function () {
                 var _a;
-                var chart = this.chart,
-                    exportDivElements = chart.exportDivElements,
-                    exportingOptions = chart.options.exporting,
-                    menuItems = (_a = exportingOptions === null || exportingOptions === void 0 ? void 0 : exportingOptions.buttons) === null || _a === void 0 ? void 0 : _a.contextButton.menuItems,
-                    lang = chart.options.lang;
+                var chart = this.chart, exportDivElements = chart.exportDivElements, exportingOptions = chart.options.exporting, menuItems = (_a = exportingOptions === null || exportingOptions === void 0 ? void 0 : exportingOptions.buttons) === null || _a === void 0 ? void 0 : _a.contextButton.menuItems, lang = chart.options.lang;
                 if ((exportingOptions === null || exportingOptions === void 0 ? void 0 : exportingOptions.menuItemDefinitions) && (lang === null || lang === void 0 ? void 0 : lang.exitFullscreen) &&
                     lang.viewFullscreen &&
                     menuItems &&
@@ -256,25 +250,22 @@
          *
          * */
         var chartNavigation = {
-                /**
-                 * Initializes `chart.navigation` object which delegates `update()` methods
-                 * to all other common classes (used in exporting and navigationBindings).
-                 *
-                 * @private
-                 * @param {Highcharts.Chart} chart
-                 *        The chart instance.
-                 * @return {void}
-                 */
-                initUpdate: function (chart) {
-                    if (!chart.navigation) {
-                        chart.navigation = {
-                            updates: [],
-                            update: function (options,
-            redraw) {
-                                this.updates.forEach(function (updateConfig) {
-                                    updateConfig.update.call(updateConfig.context,
-            options,
-            redraw);
+            /**
+             * Initializes `chart.navigation` object which delegates `update()` methods
+             * to all other common classes (used in exporting and navigationBindings).
+             *
+             * @private
+             * @param {Highcharts.Chart} chart
+             *        The chart instance.
+             * @return {void}
+             */
+            initUpdate: function (chart) {
+                if (!chart.navigation) {
+                    chart.navigation = {
+                        updates: [],
+                        update: function (options, redraw) {
+                            this.updates.forEach(function (updateConfig) {
+                                updateConfig.update.call(updateConfig.context, options, redraw);
                             });
                         }
                     };
@@ -316,23 +307,9 @@
          *  !!!!!!! SOURCE GETS TRANSPILED BY TYPESCRIPT. EDIT TS FILE ONLY. !!!!!!!
          *
          * */
-        var doc = H.doc,
-            isTouchDevice = H.isTouchDevice,
-            win = H.win;
+        var doc = H.doc, isTouchDevice = H.isTouchDevice, win = H.win;
         var defaultOptions = O.defaultOptions;
-        var addEvent = U.addEvent,
-            css = U.css,
-            createElement = U.createElement,
-            discardElement = U.discardElement,
-            extend = U.extend,
-            find = U.find,
-            fireEvent = U.fireEvent,
-            isObject = U.isObject,
-            merge = U.merge,
-            objectEach = U.objectEach,
-            pick = U.pick,
-            removeEvent = U.removeEvent,
-            uniqueKey = U.uniqueKey;
+        var addEvent = U.addEvent, css = U.css, createElement = U.createElement, discardElement = U.discardElement, extend = U.extend, find = U.find, fireEvent = U.fireEvent, isObject = U.isObject, merge = U.merge, objectEach = U.objectEach, pick = U.pick, removeEvent = U.removeEvent, uniqueKey = U.uniqueKey;
         /**
          * Gets fired after a chart is printed through the context menu item or the
          * Chart.print method.
@@ -400,10 +377,7 @@
          * @typedef {"image/png"|"image/jpeg"|"application/pdf"|"image/svg+xml"} Highcharts.ExportingMimeTypeValue
          */
         // create shortcuts
-        var userAgent = win.navigator.userAgent,
-            symbols = H.Renderer.prototype.symbols,
-            isMSBrowser = /Edge\/|Trident\/|MSIE /.test(userAgent),
-            isFirefoxBrowser = /firefox/i.test(userAgent);
+        var userAgent = win.navigator.userAgent, symbols = H.Renderer.prototype.symbols, isMSBrowser = /Edge\/|Trident\/|MSIE /.test(userAgent), isFirefoxBrowser = /firefox/i.test(userAgent);
         // Add language
         extend(defaultOptions.lang
         /**
@@ -1246,16 +1220,13 @@
          */
         H.post = function (url, data, formAttributes) {
             // create the form
-            var form = createElement('form',
-                merge({
-                    method: 'post',
-                    action: url,
-                    enctype: 'multipart/form-data'
-                },
-                formAttributes), {
-                    display: 'none'
-                },
-                doc.body);
+            var form = createElement('form', merge({
+                method: 'post',
+                action: url,
+                enctype: 'multipart/form-data'
+            }, formAttributes), {
+                display: 'none'
+            }, doc.body);
             // add the data
             objectEach(data, function (val, name) {
                 createElement('input', {
@@ -1300,8 +1271,7 @@
              * @requires modules/exporting
              */
             sanitizeSVG: function (svg, options) {
-                var split = svg.indexOf('</svg>') + 6,
-                    html = svg.substr(split);
+                var split = svg.indexOf('</svg>') + 6, html = svg.substr(split);
                 // Remove any HTML added to the container after the SVG (#894, #9087)
                 svg = svg.substr(0, split);
                 // Move HTML into a foreignObject
@@ -1379,18 +1349,9 @@
              * @requires modules/exporting
              */
             getSVG: function (chartOptions) {
-                var chart = this,
-                    chartCopy,
-                    sandbox,
-                    svg,
-                    seriesOptions,
-                    sourceWidth,
-                    sourceHeight,
-                    cssWidth,
-                    cssHeight, 
-                    // Copy the options and add extra options
-                    options = merge(chart.options,
-                    chartOptions);
+                var chart = this, chartCopy, sandbox, svg, seriesOptions, sourceWidth, sourceHeight, cssWidth, cssHeight, 
+                // Copy the options and add extra options
+                options = merge(chart.options, chartOptions);
                 // Use userOptions to make the options chain in series right (#3881)
                 options.plotOptions = merge(chart.userOptions.plotOptions, chartOptions && chartOptions.plotOptions);
                 // ... and likewise with time, avoid that undefined time properties are
@@ -1459,10 +1420,9 @@
                 }
                 // Reflect axis extremes in the export (#5924)
                 chart.axes.forEach(function (axis) {
-                    var axisCopy = find(chartCopy.axes,
-                        function (copy) {
-                            return copy.options.internalKey ===
-                                axis.userOptions.internalKey;
+                    var axisCopy = find(chartCopy.axes, function (copy) {
+                        return copy.options.internalKey ===
+                            axis.userOptions.internalKey;
                     }), extremes = axis.getExtremes(), userMin = extremes.userMin, userMax = extremes.userMax;
                     if (axisCopy &&
                         ((typeof userMin !== 'undefined' &&
@@ -1511,8 +1471,7 @@
              * @requires modules/exporting
              */
             getFilename: function () {
-                var s = this.userOptions.title && this.userOptions.title.text,
-                    filename = this.options.exporting.filename;
+                var s = this.userOptions.title && this.userOptions.title.text, filename = this.options.exporting.filename;
                 if (filename) {
                     return filename.replace(/\//g, '-');
                 }
@@ -1561,8 +1520,7 @@
              * @requires modules/exporting
              */
             exportChart: function (exportingOptions, chartOptions) {
-                var svg = this.getSVGForExport(exportingOptions,
-                    chartOptions);
+                var svg = this.getSVGForExport(exportingOptions, chartOptions);
                 // merge the options
                 exportingOptions = merge(this.options.exporting, exportingOptions);
                 // do the post
@@ -1606,14 +1564,11 @@
             * @fires Highcharts.Chart#event:beforePrint
             */
             beforePrint: function () {
-                var chart = this,
-                    body = doc.body,
-                    printMaxWidth = chart.options.exporting.printMaxWidth,
-                    printReverseInfo = {
-                        childNodes: body.childNodes,
-                        origDisplay: [],
-                        resetParams: void 0
-                    };
+                var chart = this, body = doc.body, printMaxWidth = chart.options.exporting.printMaxWidth, printReverseInfo = {
+                    childNodes: body.childNodes,
+                    origDisplay: [],
+                    resetParams: void 0
+                };
                 var handleMaxWidth;
                 chart.isPrinting = true;
                 chart.pointer.reset(null, 0);
@@ -1658,9 +1613,7 @@
                 if (!chart.printReverseInfo) {
                     return void 0;
                 }
-                var childNodes = chart.printReverseInfo.childNodes,
-                    origDisplay = chart.printReverseInfo.origDisplay,
-                    resetParams = chart.printReverseInfo.resetParams;
+                var childNodes = chart.printReverseInfo.childNodes, origDisplay = chart.printReverseInfo.origDisplay, resetParams = chart.printReverseInfo.resetParams;
                 // put the chart back in
                 chart.moveContainers(chart.renderTo);
                 // restore all body content
@@ -1739,16 +1692,8 @@
              * @requires modules/exporting
              */
             contextMenu: function (className, items, x, y, width, height, button) {
-                var chart = this,
-                    navOptions = chart.options.navigation,
-                    chartWidth = chart.chartWidth,
-                    chartHeight = chart.chartHeight,
-                    cacheName = 'cache-' + className,
-                    menu = chart[cacheName],
-                    menuPadding = Math.max(width,
-                    height), // for mouse leave detection
-                    innerMenu,
-                    menuStyle;
+                var chart = this, navOptions = chart.options.navigation, chartWidth = chart.chartWidth, chartHeight = chart.chartHeight, cacheName = 'cache-' + className, menu = chart[cacheName], menuPadding = Math.max(width, height), // for mouse leave detection
+                innerMenu, menuStyle;
                 // create the menu only the first time
                 if (!menu) {
                     // create a HTML element above the SVG
@@ -1882,15 +1827,7 @@
              * @requires modules/exporting
              */
             addButton: function (options) {
-                var chart = this,
-                    renderer = chart.renderer,
-                    btnOptions = merge(chart.options.navigation.buttonOptions,
-                    options),
-                    onclick = btnOptions.onclick,
-                    menuItems = btnOptions.menuItems,
-                    symbol,
-                    button,
-                    symbolSize = btnOptions.symbolSize || 12;
+                var chart = this, renderer = chart.renderer, btnOptions = merge(chart.options.navigation.buttonOptions, options), onclick = btnOptions.onclick, menuItems = btnOptions.menuItems, symbol, button, symbolSize = btnOptions.symbolSize || 12;
                 if (!chart.btnCount) {
                     chart.btnCount = 0;
                 }
@@ -1902,11 +1839,7 @@
                 if (btnOptions.enabled === false) {
                     return;
                 }
-                var attr = btnOptions.theme,
-                    states = attr.states,
-                    hover = states && states.hover,
-                    select = states && states.select,
-                    callback;
+                var attr = btnOptions.theme, states = attr.states, hover = states && states.hover, select = states && states.select, callback;
                 if (!chart.styledMode) {
                     attr.fill = pick(attr.fill, '#ffffff');
                     attr.stroke = pick(attr.stroke, 'none');
@@ -1993,11 +1926,7 @@
              * @requires modules/exporting
              */
             destroyExport: function (e) {
-                var chart = e ? e.target : this,
-                    exportSVGElements = chart.exportSVGElements,
-                    exportDivElements = chart.exportDivElements,
-                    exportEvents = chart.exportEvents,
-                    cacheName;
+                var chart = e ? e.target : this, exportSVGElements = chart.exportSVGElements, exportDivElements = chart.exportDivElements, exportEvents = chart.exportEvents, cacheName;
                 // Destroy the extra buttons added
                 if (exportSVGElements) {
                     exportSVGElements.forEach(function (elem, i) {
@@ -2086,15 +2015,8 @@
          * @requires modules/exporting
          */
         Chart.prototype.inlineStyles = function () {
-            var renderer = this.renderer,
-                inlineToAttributes = renderer.inlineToAttributes,
-                blacklist = renderer.inlineBlacklist,
-                whitelist = renderer.inlineWhitelist, // For IE
-                unstyledElements = renderer.unstyledElements,
-                defaultStyles = {},
-                dummySVG,
-                iframe,
-                iframeDoc;
+            var renderer = this.renderer, inlineToAttributes = renderer.inlineToAttributes, blacklist = renderer.inlineBlacklist, whitelist = renderer.inlineWhitelist, // For IE
+            unstyledElements = renderer.unstyledElements, defaultStyles = {}, dummySVG, iframe, iframeDoc;
             // Create an iframe where we read default styles without pollution from this
             // body
             iframe = doc.createElement('iframe');
@@ -2129,14 +2051,7 @@
              * @return {void}
              */
             function recurse(node) {
-                var styles,
-                    parentStyles,
-                    cssText = '',
-                    dummy,
-                    styleAttr,
-                    blacklisted,
-                    whitelisted,
-                    i;
+                var styles, parentStyles, cssText = '', dummy, styleAttr, blacklisted, whitelisted, i;
                 /**
                  * Check computed styles and whether they are in the white/blacklist for
                  * styles or atttributes.
@@ -2254,30 +2169,17 @@
         };
         symbols.menu = function (x, y, width, height) {
             var arr = [
-                    ['M',
-                x,
-                y + 2.5],
-                    ['L',
-                x + width,
-                y + 2.5],
-                    ['M',
-                x,
-                y + height / 2 + 0.5],
-                    ['L',
-                x + width,
-                y + height / 2 + 0.5],
-                    ['M',
-                x,
-                y + height - 1.5],
-                    ['L',
-                x + width,
-                y + height - 1.5]
-                ];
+                ['M', x, y + 2.5],
+                ['L', x + width, y + 2.5],
+                ['M', x, y + height / 2 + 0.5],
+                ['L', x + width, y + height / 2 + 0.5],
+                ['M', x, y + height - 1.5],
+                ['L', x + width, y + height - 1.5]
+            ];
             return arr;
         };
         symbols.menuball = function (x, y, width, height) {
-            var path = [],
-                h = (height / 3) - 2;
+            var path = [], h = (height / 3) - 2;
             path = path.concat(this.circle(width - h, y, h, h), this.circle(width - h, y + h + 4, h, h), this.circle(width - h, y + 2 * (h + 4), h, h));
             return path;
         };
@@ -2289,10 +2191,7 @@
          * @requires modules/exporting
          */
         Chart.prototype.renderExporting = function () {
-            var chart = this,
-                exportingOptions = chart.options.exporting,
-                buttons = exportingOptions.buttons,
-                isDirty = chart.isDirtyExporting || !chart.exportSVGElements;
+            var chart = this, exportingOptions = chart.options.exporting, buttons = exportingOptions.buttons, isDirty = chart.isDirtyExporting || !chart.exportSVGElements;
             chart.buttonOffset = 0;
             if (chart.isDirtyExporting) {
                 chart.destroyExport();
@@ -2354,9 +2253,7 @@
             // Uncomment this to see a button directly below the chart, for quick
             // testing of export
             /*
-            var button,
-                viewImage,
-                viewSource;
+            var button, viewImage, viewSource;
             if (!chart.renderer.forExport) {
                 viewImage = function () {
                     var div = doc.createElement('div');
